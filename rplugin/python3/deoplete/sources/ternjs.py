@@ -26,7 +26,7 @@ class Source(Base):
         super(Source, self).__init__(vim)
 
         self.name = 'tern'
-        self.mark = '[TernJS]'
+        self.mark = '[js]'
         self.input_pattern = (r'\.\w*$|^\s*@\w*$|' + import_re)
         self.rank = 900
         self.filetypes = ['javascript']
@@ -219,7 +219,7 @@ class Source(Base):
         query['file'] = fname
         query['end'] = pos
         query['lineCharPositions'] = True
-        query['omitObjectPrototype'] = False
+        query['omitObjectPrototype'] = True
         query['sort'] = False
         data = None
         data = self.make_request(doc, silent)
@@ -308,10 +308,10 @@ class Source(Base):
                     abbr = rec['name']
 
                 completions.append({
-                    'menu': '[TernJS] ',
+                    'menu': '[js] ',
                     'kind': icon,
                     'word': rec['name'],
-                    'abbr': abbr,
+                    # 'abbr': abbr,
                     'info': self.type_doc(rec),
                     'dup': 1,
                 })
